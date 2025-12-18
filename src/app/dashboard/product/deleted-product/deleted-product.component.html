@@ -1,0 +1,35 @@
+
+<table>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Brand</th>
+      <th>Category</th>
+      <th>SubCategory</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+        @if (product.isDeleted) {
+      <img 
+      [src]="'http://localhost:3000/uploads/' + product.image" 
+      alt="{{ product.name }}" 
+      width="60" />      
+      <td>{{ product.name }}</td>
+      <td>{{ product.brand.name }}</td>
+      <td>{{ product.category.name }}</td>
+      <td>{{ product.subCategory.name }}</td>
+      <td>{{ product.price | currency }}</td>
+      <td>{{ product.quantity }}</td>
+      <td>
+        <button (click)="RestoreProduct(product._id)">Restore</button>
+      </td>
+    }
+    </tr>
+  </tbody>
+</table>
+

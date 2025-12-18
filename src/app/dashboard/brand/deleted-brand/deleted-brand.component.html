@@ -1,0 +1,39 @@
+<div class="brand-list-container">
+    <h2>Brand List</h2>
+    <!-- <div class="actions">
+      <button routerLink="brand" class="btn btn-primary">Back</button>
+
+    </div> -->
+    <table *ngIf="brands.length; else noBrands">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let brand of brands">
+          @if (brand.isDeleted) {
+          <td>{{ brand.name }}</td>
+          <td>
+            <button (click)="restoreSubcategory(brand._id)">Delete</button>
+          </td>
+        }
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noBrands>
+      <p>No brands found.</p>
+    </ng-template>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  

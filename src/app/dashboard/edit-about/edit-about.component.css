@@ -1,0 +1,16 @@
+h2 {
+  margin-bottom: 20px;
+  color: #3f51b5;
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.full-width {
+  width: 100%;
+}

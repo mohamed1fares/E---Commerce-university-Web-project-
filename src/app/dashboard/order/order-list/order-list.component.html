@@ -1,0 +1,121 @@
+<h2 class="title">Order List (Admin)</h2>
+
+<div *ngIf="loading" class="loading">Loading orders...</div>
+<div *ngIf="error" class="alert alert--error">{{ error }}</div>
+
+<div class="table-responsive" *ngIf="!loading && groupedOrders.length">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Products</th>
+        <th>Status</th>
+        <th>Total</th>
+        <th class="text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let g of groupedOrders">
+        <td>{{ g.user?.name || g.user?.email || '-' }}</td>
+        <td>
+          <ul class="items">
+            <li *ngFor="let o of g.orders">
+              {{ o.product?.name }} (x{{ o.quantity }})
+            </li>
+          </ul>
+        </td>
+        <td>
+          <ul class="items">
+            <li *ngFor="let o of g.orders" class="flex items-center gap-2">
+              <!-- badge -->
+              <span class="badge"
+                [ngClass]="{
+                  'badge--pending': o.status === 'pending',
+                  'badge--processing': o.status === 'processing',
+                  'badge--shipped': o.status === 'shipped',
+                  'badge--delivered': o.status === 'delivered',
+                  'badge--cancelled': o.status === 'cancelled',
+                  'badge--returned': o.status === 'returned'
+                }">
+                {{ o.status }}
+              </span>
+
+              <!-- dropdown -->
+              <select class="select"
+                      [(ngModel)]="o.status"
+                      (ngModelChange)="changeStatus(o, $event)">
+                <option *ngFor="let s of statuses" [ngValue]="s">{{ s }}</option>
+              </select>
+            </li>
+          </ul>
+        </td>
+        <td class="mono">{{ g.total | currency }}</td>
+        <td class="text-right">
+          <button class="btn btn--ghost" (click)="viewUserOrders(g)">View</button>
+          <button class="btn btn--danger" (click)="deleteOrder(g)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="!loading && groupedOrders.length === 0" class="empty-state">
+  No orders found
+</div>
+
+<!-- pagination -->
+<div class="pagination" *ngIf="!loading && groupedOrders.length">
+  <button class="btn" (click)="prevPage()" [disabled]="page===1">Previous</button>
+  <span class="pagination__info">Page {{page}}</span>
+  <button class="btn" (click)="nextPage()" [disabled]="page*limit>=total">Next</button>
+</div>
+
+<!-- details drawer / modal -->
+<div *ngIf="selectedGroup" class="overlay" (click)="closeDetail()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <h3 class="modal__title">Orders for {{ selectedGroup.user?.name || selectedGroup.user?.email }}</h3>
+      <button class="icon-btn" (click)="closeDetail()" aria-label="Close">✕</button>
+    </div>
+
+    <div *ngIf="detailLoading" class="loading loading--inline">Loading...</div>
+
+    <div *ngIf="!detailLoading" class="modal__body">
+      <h4 class="sub-title">Orders</h4>
+      <ul class="items">
+        <li *ngFor="let o of selectedGroup.orders" class="flex items-center gap-2">
+          <span class="mono">{{ o.product?.name }}</span>
+          <span>x{{ o.quantity }}</span>
+          <span class="mono">{{ o.total | currency }}</span>
+
+          <span class="badge"
+            [ngClass]="{
+              'badge--pending': o.status === 'pending',
+              'badge--processing': o.status === 'processing',
+              'badge--shipped': o.status === 'shipped',
+              'badge--delivered': o.status === 'delivered',
+              'badge--cancelled': o.status === 'cancelled',
+              'badge--returned': o.status === 'returned'
+            }">
+            {{ o.status }}
+          </span>
+
+          <!-- dropdown -->
+          <select class="select"
+                  [(ngModel)]="o.status"
+                  (ngModelChange)="changeStatus(o, $event)">
+            <option *ngFor="let s of statuses" [ngValue]="s">{{ s }}</option>
+          </select>
+        </li>
+      </ul>
+
+      <div class="card mt-2">
+        <p><b>Total for this user:</b> {{ selectedGroup.total | currency }}</p>
+      </div>
+    </div>
+
+    <div class="modal__footer">
+      <button class="btn" (click)="closeDetail()">Close</button>
+    </div>
+  </div>
+</div>

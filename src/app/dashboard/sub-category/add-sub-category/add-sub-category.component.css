@@ -1,0 +1,70 @@
+/* Container */
+.add-subcategory-container {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Heading */
+.add-subcategory-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+  text-align: center;
+}
+
+/* Form Fields */
+.add-subcategory-container form div {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-subcategory-container label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.add-subcategory-container input,
+.add-subcategory-container select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.add-subcategory-container input:focus,
+.add-subcategory-container select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  outline: none;
+}
+
+/* Submit Button */
+.add-subcategory-container button {
+  width: 100%;
+  padding: 10px 0;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-subcategory-container button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.add-subcategory-container button:disabled {
+  background-color: #a0c4ff;
+  cursor: not-allowed;
+}

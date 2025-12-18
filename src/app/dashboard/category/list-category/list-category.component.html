@@ -1,0 +1,77 @@
+<!-- <div class="category-list-container">
+  <h2>Categories</h2>
+  <button routerLink="add-category" class="add-product-btn">
+    Add Product
+  </button>
+
+  @if (categories.length > 0) {
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Category Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (cat of categories; track cat._id; let i = $index) {
+          <tr>
+            <td>{{ i + 1 }}</td>
+            <td>{{ cat.category }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else {
+    <div>No categories available.</div>
+  }
+</div>
+
+ -->
+
+
+
+
+<div class="subcategory-list-container">
+  <h2>Subcategories</h2>
+  <div class="actions">
+    <button routerLink="add-category"
+      class="btn btn-primary">Add
+      Category</button>
+    <button routerLink="deletd-category"
+      class="btn btn-danger">Show
+      Deleted</button>
+  </div>
+
+  <div *ngIf="categories.length; else noData">
+    <table class="subcategory-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Active</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sub of categories">
+          @if (!sub.isDeleted) {
+          <td>{{ sub.category }}</td>
+          
+          <td>Active</td>
+          
+          <td>
+            <button class="btn btn-sm btn-danger"
+              (click)="deleteSubcategory(sub._id)">
+              Delete
+            </button>
+          </td>
+          }
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noData>
+    <p>No subcategories found.</p>
+  </ng-template>
+</div>
+

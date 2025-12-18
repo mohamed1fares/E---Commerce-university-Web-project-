@@ -1,0 +1,23 @@
+<h2>Edit About</h2>
+
+<form [formGroup]="aboutForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" />
+    <mat-error *ngIf="title?.touched && title?.invalid">
+      Title is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Facebook Link</mat-label>
+    <input matInput formControlName="facebookLink" />
+    <mat-error *ngIf="facebookLink?.touched && facebookLink?.invalid">
+      Facebook link is required
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">
+    Save Changes
+  </button>
+</form>

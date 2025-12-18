@@ -1,0 +1,22 @@
+<div class="add-brand-container">
+  <h2>Add New Brand</h2>
+
+  <form [formGroup]="brandForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Brand Name</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        placeholder="Enter brand name"
+        [class.invalid]="brandForm.get('name')?.invalid && (brandForm.get('name')?.touched || brandForm.get('name')?.dirty)"
+      />
+      <div class="error" *ngIf="brandForm.get('name')?.invalid && (brandForm.get('name')?.touched || brandForm.get('name')?.dirty)">
+        <span *ngIf="brandForm.get('name')?.errors?.['required']">Brand name is required</span>
+        <span *ngIf="brandForm.get('name')?.errors?.['minlength']">Name must be at least 2 characters</span>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="brandForm.invalid">Add Brand</button>
+  </form>
+</div>

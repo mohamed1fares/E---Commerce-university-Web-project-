@@ -1,0 +1,60 @@
+<div class="deleted-subcategory-container">
+  <h2>Deleted Subcategories</h2>
+
+  <!-- <div *ngIf="deletedSubcategories.length; else noDeleted">
+    <table class="subcategory-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Category ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sub of deletedSubcategories">
+          <td>{{ sub.name }}</td>
+          <td>{{ sub._id }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noDeleted>
+    <p>No deleted subcategories found.</p>
+  </ng-template>
+</div> -->
+
+
+
+
+
+
+
+<div *ngIf="deletedSubcategories.length; else noData">
+    <table class="subcategory-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Category ID</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sub of deletedSubcategories">
+          <td>{{ sub.name }}</td>
+          <td>{{ sub._id }}</td>
+        
+           <td><button class="btn btn-sm btn-danger"
+              (click)="restoreSubcategory(sub._id)">
+              Restore
+            </button>
+          </td> 
+        
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noData>
+    <p>No subcategories found.</p>
+  </ng-template>
+

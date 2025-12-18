@@ -1,0 +1,173 @@
+<div class="add-product-container">
+  <h2>Add New Product</h2>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Product Name</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        placeholder="Enter product name"
+        [class.invalid]="productForm.get('name')?.invalid && (productForm.get('name')?.touched || productForm.get('name')?.dirty)">
+      <div class="error"
+        *ngIf="productForm.get('name')?.invalid && (productForm.get('name')?.touched || productForm.get('name')?.dirty)">
+        <span *ngIf="productForm.get('name')?.errors?.['required']">Product name
+          is required</span>
+        <span *ngIf="productForm.get('name')?.errors?.['minlength']">Name must
+          be at least 3 characters</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Image URL</label>
+      <input
+        type="file"
+        (change)="onImageSelected($event)"
+        accept="image/*"
+        class="form-control" />
+      <div class="error"
+        *ngIf="productForm.get('image')?.invalid && (productForm.get('image')?.touched || productForm.get('image')?.dirty)">
+        <span *ngIf="productForm.get('image')?.errors?.['required']">Image URL
+          is required</span>
+        <span *ngIf="productForm.get('image')?.errors?.['pattern']">Enter a
+          valid image URL (png, jpg, jpeg, gif)</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        rows="6"
+        placeholder="Enter product description"
+        [class.invalid]="productForm.get('description')?.invalid && (productForm.get('description')?.touched || productForm.get('description')?.dirty)"></textarea>
+      <div class="error"
+        *ngIf="productForm.get('description')?.invalid && (productForm.get('description')?.touched || productForm.get('description')?.dirty)">
+        <span
+          *ngIf="productForm.get('description')?.errors?.['required']">Description
+          is required</span>
+        <span
+          *ngIf="productForm.get('description')?.errors?.['minlength']">Description
+          must be at least 10 characters</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input
+        type="number"
+        id="price"
+        formControlName="price"
+        placeholder="Enter price"
+        [class.invalid]="productForm.get('price')?.invalid && (productForm.get('price')?.touched || productForm.get('price')?.dirty)">
+      <div class="error"
+        *ngIf="productForm.get('price')?.invalid && (productForm.get('price')?.touched || productForm.get('price')?.dirty)">
+        <span *ngIf="productForm.get('price')?.errors?.['required']">Price is
+          required</span>
+        <span *ngIf="productForm.get('price')?.errors?.['min']">Price must be
+          greater than 0</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input
+        type="number"
+        id="quantity"
+        formControlName="quantity"
+        placeholder="Enter quantity"
+        [class.invalid]="productForm.get('quantity')?.invalid && (productForm.get('quantity')?.touched || productForm.get('quantity')?.dirty)">
+      <div class="error"
+        *ngIf="productForm.get('quantity')?.invalid && (productForm.get('quantity')?.touched || productForm.get('quantity')?.dirty)">
+        <span *ngIf="productForm.get('quantity')?.errors?.['required']">Quantity
+          is required</span>
+        <span *ngIf="productForm.get('quantity')?.errors?.['min']">Quantity must
+          be at least 1</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="brand">Brand</label>
+      <select
+      id="brand"
+      formControlName="brand"
+      [class.invalid]="productForm.get('brand')?.invalid && (productForm.get('brand')?.touched || productForm.get('brand')?.dirty)">
+    
+      <option value disabled selected>Select a brand</option>
+      
+      <!-- الحل: إضافة ng-container مع شرط *ngIf -->
+      <ng-container *ngFor="let brand of brands">
+        <option *ngIf="!brand.isDeleted" [value]="brand._id">
+          {{ brand.name }}
+        </option>
+      </ng-container>
+    
+    </select>
+      <div class="error"
+        *ngIf="productForm.get('brand')?.invalid && (productForm.get('brand')?.touched || productForm.get('brand')?.dirty)">
+        <span *ngIf="productForm.get('brand')?.errors?.['required']">Brand is required</span>
+        <span *ngIf="productForm.get('brand')?.errors?.['minlength']">Brand must be at least 2 characters</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="categoryId">Category</label>
+      <select
+  id="categoryId"
+  formControlName="categoryId"
+  [class.invalid]="productForm.get('categoryId')?.invalid && (productForm.get('categoryId')?.touched || productForm.get('categoryId')?.dirty)">
+
+  <option value disabled selected>Select a category</option>
+
+  <!-- استخدمنا ng-container لتطبيق الحلقة والشرط معاً -->
+  <ng-container *ngFor="let category of categories">
+    <option *ngIf="!category.isDeleted" [value]="category._id">
+      {{ category.category }}
+    </option>
+  </ng-container>
+
+</select>
+
+      <div class="error"
+        *ngIf="productForm.get('categoryId')?.invalid && (productForm.get('categoryId')?.touched || productForm.get('categoryId')?.dirty)">
+        <span *ngIf="productForm.get('categoryId')?.errors?.['required']">
+          Category is required
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="subcategoryId">Subcategory</label>
+      <select
+      id="subcategoryId"
+      formControlName="subcategoryId"
+      [disabled]="subcategoryControl.disabled"
+      [class.invalid]="subcategoryControl.invalid && (subcategoryControl.touched || subcategoryControl.dirty)">
+            
+      <option value="" disabled selected>Select a subcategory</option>
+            
+      <!-- الحل باستخدام ng-container و *ngIf -->
+      <ng-container *ngFor="let subcategory of filteredSubcategories">
+        <option *ngIf="!subcategory.isDeleted" [value]="subcategory._id">
+          {{ subcategory.name }}
+        </option>
+      </ng-container>
+    
+    </select>
+    
+      <!-- رسائل الخطأ -->
+      <div class="error"
+        *ngIf="productForm.get('subcategoryId')?.invalid && (productForm.get('subcategoryId')?.touched || productForm.get('subcategoryId')?.dirty)">
+        <span *ngIf="productForm.get('subcategoryId')?.errors?.['required']">
+          Subcategory is required
+        </span>
+      </div>
+    </div>
+    
+
+    <button type="submit" [disabled]="productForm.invalid">Add Product
+    </button>
+  </form>
+
+</div>

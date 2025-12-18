@@ -1,0 +1,50 @@
+<h2>Product List</h2>
+<div class="actions">
+  <button routerLink="add-product" class="btn btn-primary">
+    Add Product
+  </button>
+  <button 
+  routerLink="deleted-product"
+  class="btn btn-danger custom-delete-btn">
+  Show Deleted
+</button>
+
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Brand</th>
+      <th>Category</th>
+      <th>SubCategory</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      @if(!product.isDeleted){
+
+      <img 
+      [src]="'http://localhost:3000/uploads/' + product.image" 
+      alt="{{ product.name }}" 
+      width="60" />      
+      <td>{{ product.name }}</td>
+      <td>{{ product.brand.name }}</td>
+      <td>{{ product.category.category }}</td>
+      <td>{{ product.subCategory.name }}</td>
+      <td>{{ product.price | currency }}</td>
+      <td>{{ product.quantity }}</td>
+      <td>
+        <button (click)="openEditProduct(product)">Edit</button>
+        <button (click)="deleltedproduct(product._id)">Delete</button>
+      </td>
+    }
+    </tr>
+  </tbody>
+</table>
+
+<app-edit-product-modal *ngIf="editingProduct" [product]="editingProduct" (close)="editingProduct = null" (updated)="onProductUpdated($event)"></app-edit-product-modal>

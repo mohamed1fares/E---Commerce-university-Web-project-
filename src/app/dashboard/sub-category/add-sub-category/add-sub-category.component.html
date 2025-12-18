@@ -1,0 +1,24 @@
+<div class="add-subcategory-container">
+  <h2>Add Subcategory</h2>
+  <form [formGroup]="subcategoryForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name</label>
+      <input id="name" formControlName="name" placeholder="Subcategory name" />
+    </div>
+    <div>
+      <label for="category">Category</label>
+      <select id="category" formControlName="category">
+        <option value="">Select category</option>
+        <ng-container *ngFor="let cat of categories">
+          <option *ngIf="!cat.isDeleted" [value]="cat._id">
+            {{ cat.category }}
+          </option>
+        </ng-container>
+      </select>
+    </div>
+    
+    
+
+    <button type="submit" [disabled]="subcategoryForm.invalid">Add Subcategory</button>
+  </form>
+</div>

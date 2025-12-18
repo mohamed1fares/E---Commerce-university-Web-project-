@@ -1,0 +1,41 @@
+<div class="subcategory-list-container">
+  <h2>Subcategories</h2>
+  <div class="actions">
+    <button routerLink="add-subcategory"
+      class="btn btn-primary">Add
+      Subcategory</button>
+    <button routerLink="deleted-subcategory"
+      class="btn btn-danger">Show
+      Deleted</button>
+  </div>
+
+  <div *ngIf="subcategories.length; else noData">
+    <table class="subcategory-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sub of subcategories" >
+          @if(!sub.isDeleted){
+          <td>{{ sub.name }}</td>
+          <td>{{ sub.category?.category }}</td> <!-- Woman's -->
+          <!-- <td>{{ sub.category?.name }}</td>     Jackets -->
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="deleteSubcategory(sub._id)">
+              Delete
+            </button>
+          </td>
+        }
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noData>
+    <p>No subcategories found.</p>
+  </ng-template>
+</div>

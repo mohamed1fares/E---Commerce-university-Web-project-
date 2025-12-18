@@ -1,0 +1,26 @@
+<div class="add-category-container">
+  <h2>Add New Category</h2>
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="category">Category Name</label>
+      <input
+        type="text"
+        id="category"
+        formControlName="category"
+        placeholder="Enter category name"
+        [class.invalid]="categoryForm.get('category')?.invalid && (categoryForm.get('category')?.touched || categoryForm.get('category')?.dirty)"
+      />
+      <div
+        class="error"
+        *ngIf="categoryForm.get('category')?.invalid && (categoryForm.get('category')?.touched || categoryForm.get('category')?.dirty)"
+      >
+        <span *ngIf="categoryForm.get('category')?.errors?.['required']">Category name is required</span>
+        <span *ngIf="categoryForm.get('category')?.errors?.['minlength']">Name must be at least 3 characters</span>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="categoryForm.invalid">
+      Add Category
+    </button>
+  </form>
+</div>
