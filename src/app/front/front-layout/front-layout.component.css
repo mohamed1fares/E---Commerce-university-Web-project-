@@ -1,0 +1,323 @@
+/* .front-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.filter-sidebar {
+  width: 260px;
+  background: #fff;
+  padding: 2rem 1.5rem;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+  border-radius: 0 12px 12px 0;
+  margin-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.filter-group label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.filter-group select {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-top: 0.25rem;
+}
+
+.product-grid-area {
+  flex: 1;
+  padding: 2rem 2rem 2rem 0;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  transition: box-shadow 0.2s;
+  position: relative;
+}
+.product-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.13);
+}
+.product-image {
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.product-image img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+  background: #f8f8f8;
+}
+.product-info {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.product-info h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0.5rem 0 0.25rem 0;
+}
+.product-price {
+  color: #b12704;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0.25rem 0;
+}
+.product-desc {
+  color: #555;
+  font-size: 0.95rem;
+  margin: 0.25rem 0 0 0;
+  min-height: 2.5em;
+}
+.buy-btn {
+  background: #ffd814;
+  color: #111;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: auto;
+}
+.buy-btn:hover {
+  background: #f7ca00;
+}
+@media (max-width: 900px) {
+  .front-container {
+    flex-direction: column;
+  }
+  .filter-sidebar {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 2rem;
+    border-radius: 0 0 12px 12px;
+  }
+  .product-grid-area {
+    padding: 0 1rem;
+  }
+}
+
+.front-container {
+  display: flex;
+  gap: 20px;
+}
+
+.filter-sidebar {
+  width: 200px;
+  border-right: 1px solid #ddd;
+  padding: 10px;
+}
+
+.product-grid-area {
+  flex: 1;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.product-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f9f9f9;
+} */
+
+/* الحاوية الرئيسية - خلفية أهدى للعين */
+.front-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8f9fa; /* رمادي فاتح جداً عشان يبرز الكروت البيضاء */
+  gap: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* الجانب الفلتر - شكل Sidebar احترافي */
+.filter-sidebar {
+  width: 280px;
+  background: #ffffff;
+  padding: 2rem 1.5rem;
+  border-right: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 4px 0 15px rgba(0,0,0,0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.filter-sidebar h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid #ffd814;
+  width: fit-content;
+}
+
+/* تحسين شكل القوائم المنسدلة */
+.filter-group label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.filter-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background-color: #fcfcfc;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.filter-group select:focus {
+  outline: none;
+  border-color: #ffd814;
+  box-shadow: 0 0 0 3px rgba(255, 216, 20, 0.2);
+}
+
+/* منطقة عرض المنتجات */
+.product-grid-area {
+  flex: 1;
+  padding: 2.5rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+/* الكارت - تحسين الظلال والزوايا */
+.product-card {
+  background: #ffffff;
+  border-radius: 16px; /* زوايا أنعم */
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.03);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  transform: translateY(-8px); /* حركة خفيفة عند الوقوف عليه */
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+/* صورة المنتج */
+.product-image {
+  width: 100%;
+  height: 180px;
+  margin-bottom: 1.2rem;
+  border-radius: 12px;
+  background: #fdfdfd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  mix-blend-mode: multiply; /* عشان لو الصورة خلفيتها بيضاء تندمج مع الكارت */
+}
+
+/* نصوص المنتج */
+.product-info h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  margin: 0.5rem 0;
+}
+
+.product-price {
+  color: #e44d26; /* لون سعر أوضح */
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.product-desc {
+  color: #777;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+  height: 2.8rem;
+  overflow: hidden;
+}
+
+/* الأزرار - Amazon Style لكن بلمسة أحدث */
+.buy-btn {
+  width: 100%;
+  background: linear-gradient(180deg, #ffd814, #f7ca00);
+  color: #111;
+  border: 1px solid #f2c200;
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.buy-btn:hover {
+  background: linear-gradient(180deg, #f7ca00, #f0bc00);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.buy-btn:active {
+  transform: scale(0.98);
+}
+
+/* تحسين التجاوب مع الموبايل */
+@media (max-width: 900px) {
+  .front-container {
+    flex-direction: column;
+  }
+  .filter-sidebar {
+    width: 100%;
+    padding: 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+  .product-grid-area {
+    padding: 1.5rem;
+  }
+}

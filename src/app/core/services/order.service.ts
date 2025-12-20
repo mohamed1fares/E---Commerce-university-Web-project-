@@ -51,4 +51,8 @@ export class OrderService {
   getUserOrders(): Observable<{ data: Order[] }> {
     return this.http.get<{ data: Order[] }>(`${this.apiUrl}/user`);
   }
+  // داخل orderService.ts
+deleteOrdersByUser(userId: string): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/user/${userId}`);
+}
 }

@@ -1,0 +1,180 @@
+<!-- 
+
+<div 
+  *ngIf="showMessage" 
+  [ngClass]="{'toast-success': success, 'toast-error': !success}" 
+  class="toast-message">
+  <span class="toast-icon">
+    <i class="fa" [ngClass]="success ? 'fa-check-circle' : 'fa-exclamation-circle'"></i>
+  </span>
+  <span class="toast-text">{{ messageText }}</span>
+</div>
+
+
+<div class="add-brand-container">
+<button type="button" class="test" routerLink="/">home</button>
+
+    <h2>your profile </h2>
+
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" id="name" 
+    formControlName="name"
+    placeholder={{decoded.name}}
+    class="email"
+    [(ngModel)]="decoded.name"
+    
+    value={{decoded.email}}
+    [class.invalid]="myForm.get('name')?.invalid && (myForm.get('name')?.touched || myForm.get('name')?.dirty)"
+    >
+    <div class="error" *ngIf="myForm.get('name')?.invalid && (myForm.get('name')?.touched || myForm.get('name')?.dirty)">
+        <span *ngIf="myForm.get('name')?.errors?.['required']"> name is required</span>
+        <span *ngIf="myForm.get('name')?.errors?.['minlength']">Name must be at least 2 characters</span>
+      </div>
+    <br>
+
+    <label for="phone">phone</label>
+    <input type="text" id="name" 
+    formControlName="phone"
+    placeholder={{decoded.phone}}
+    [(ngModel)]="decoded.phone"
+
+    class="email"
+    [class.invalid]="myForm.get('phone')?.invalid && (myForm.get('phone')?.touched || myForm.get('phone')?.dirty)"
+    >
+    <div class="error" *ngIf="myForm.get('phone')?.invalid && (myForm.get('phone')?.touched || myForm.get('phone')?.dirty)">
+        <span *ngIf="myForm.get('phone')?.errors?.['required']"> phone is required</span>
+        <span *ngIf="myForm.get('phone')?.errors?.['minlength']">phone must be at least 11 characters</span>
+      </div>
+
+
+      <br>
+
+      <label for="location">location</label>
+      <input type="text" id="location" 
+      formControlName="location"
+      placeholder={{decoded.location}}
+      class="email"
+      [(ngModel)]="decoded.location"
+
+      [class.invalid]="myForm.get('location')?.invalid && (myForm.get('location')?.touched || myForm.get('location')?.dirty)"
+      >
+      <div class="error" *ngIf="myForm.get('location')?.invalid && (myForm.get('location')?.touched || myForm.get('location')?.dirty)">
+          <span *ngIf="myForm.get('location')?.errors?.['required']"> location is required</span>
+          <span *ngIf="myForm.get('location')?.errors?.['minlength']">location must be at least 3 characters</span>
+      </div>
+
+      <br> -->
+<!-- 
+      <label for="email" class="email">email</label>
+      <input type="text" id="name" class="email"
+      formControlName="email"
+      placeholder={{decoded.email}}
+      value={{decoded.email}}
+      readonly
+      [(ngModel)]="decoded.email"
+      [class.invalid]="myForm.get('email')?.invalid && (myForm.get('email')?.touched || myForm.get('email')?.dirty)"
+      > -->
+      <!-- <input type="hidden" formArrayName="email" value="{{decoded.email}}"> -->
+      <!-- <div class="error" *ngIf="myForm.get('email')?.invalid && (myForm.get('email')?.touched || myForm.get('email')?.dirty)">
+          <span *ngIf="myForm.get('email')?.errors?.['required']"> email is required</span>
+          <span *ngIf="myForm.get('email')?.errors?.['minlength']">email must be at least 2 characters</span>
+        </div> -->
+
+
+
+<!--         
+        
+        
+    </div>
+<button type="submit" [disabled]="myForm.invalid">submit</button>
+
+    </form>
+
+</div> -->
+
+
+
+
+
+<div 
+  *ngIf="showMessage" 
+  [ngClass]="{'toast-success': success, 'toast-error': !success}" 
+  class="toast-message">
+  <span class="toast-icon">
+    <i class="fa" [ngClass]="success ? 'fa-check-circle' : 'fa-exclamation-circle'"></i>
+  </span>
+  <span class="toast-text">{{ messageText }}</span>
+</div>
+
+<div class="profile-page-wrapper">
+  <div class="profile-card">
+    <div class="profile-header">
+      <button type="button" class="back-home-btn" routerLink="/">
+        <i class="fa fa-arrow-left"></i> Home
+      </button>
+      <div class="avatar-circle">
+        <i class="fa fa-user"></i>
+      </div>
+      <h2>Personal Profile</h2>
+      <p>Update your information to keep your account secure</p>
+    </div>
+
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="profile-form">
+      <div class="form-grid">
+        
+        <div class="form-group">
+          <label for="name"><i class="fa fa-user-edit"></i> Full Name</label>
+          <input type="text" id="name" 
+            formControlName="name"
+            placeholder="{{decoded.name}}"
+            class="styled-input"
+            [(ngModel)]="decoded.name"
+            [class.invalid]="myForm.get('name')?.invalid && (myForm.get('name')?.touched || myForm.get('name')?.dirty)"
+          >
+          <div class="error-container" *ngIf="myForm.get('name')?.invalid && (myForm.get('name')?.touched || myForm.get('name')?.dirty)">
+            <span *ngIf="myForm.get('name')?.errors?.['required']">Name is required</span>
+            <span *ngIf="myForm.get('name')?.errors?.['minlength']">Minimum 2 characters</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone"><i class="fa fa-phone"></i> Phone Number</label>
+          <input type="text" id="phone" 
+            formControlName="phone"
+            placeholder="{{decoded.phone}}"
+            [(ngModel)]="decoded.phone"
+            class="styled-input"
+            [class.invalid]="myForm.get('phone')?.invalid && (myForm.get('phone')?.touched || myForm.get('phone')?.dirty)"
+          >
+          <div class="error-container" *ngIf="myForm.get('phone')?.invalid && (myForm.get('phone')?.touched || myForm.get('phone')?.dirty)">
+            <span *ngIf="myForm.get('phone')?.errors?.['required']">Phone is required</span>
+            <span *ngIf="myForm.get('phone')?.errors?.['minlength']">Must be 11 characters</span>
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="location"><i class="fa fa-map-marker-alt"></i> Location / Address</label>
+          <input type="text" id="location" 
+            formControlName="location"
+            placeholder="{{decoded.location}}"
+            class="styled-input"
+            [(ngModel)]="decoded.location"
+            [class.invalid]="myForm.get('location')?.invalid && (myForm.get('location')?.touched || myForm.get('location')?.dirty)"
+          >
+          <div class="error-container" *ngIf="myForm.get('location')?.invalid && (myForm.get('location')?.touched || myForm.get('location')?.dirty)">
+            <span *ngIf="myForm.get('location')?.errors?.['required']">Location is required</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="submit-btn" [disabled]="myForm.invalid">
+          <i class="fa fa-save"></i> Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

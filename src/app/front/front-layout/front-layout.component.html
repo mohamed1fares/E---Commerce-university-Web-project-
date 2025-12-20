@@ -1,0 +1,35 @@
+<app-front-navbar></app-front-navbar>
+<div class="front-container">
+  <aside class="filter-sidebar">
+    <br>
+    <h3>Filter by</h3>
+
+    <!-- Categories -->
+    <!-- Categories -->
+    <div class="filter-group">
+      <label>Category</label>
+      <select title="testing" #catSelect (change)="onCategoryChange(catSelect.value)">
+        <option value="">All Categories</option>
+        <option *ngFor="let cat of categories" [value]="cat._id">
+          {{ cat.category }}
+        </option>
+      </select>
+    </div>
+    
+    <!-- Subcategories -->
+    <div class="filter-group">
+      <label>Subcategory</label>
+      <select title="testing" #subSelect (change)="onSubcategoryChange(subSelect.value)">
+        <option value="">All Subcategories</option>
+        <option *ngFor="let sub of filteredSubcategories" [value]="sub._id">
+          {{ sub.name }}
+        </option>
+      </select>
+    </div>
+    
+  </aside>
+
+  <main class="product-grid-area">
+    <router-outlet></router-outlet>
+  </main>
+</div>

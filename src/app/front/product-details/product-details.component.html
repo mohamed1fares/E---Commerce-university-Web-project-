@@ -1,0 +1,38 @@
+<div *ngIf="loading" class="loading">Loading product...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div *ngIf="product" class="product-container">
+
+  <!-- Main Product -->
+  <div class="product-main">
+    <div class="image-wrapper">
+      <img [src]="'http://localhost:3000/uploads/' + product.image" alt="{{ product.name }}">
+    </div>
+
+    <div class="details">
+      <h2>{{ product.name }}</h2>
+      <p class="description">{{ product.description }}</p>
+      <p><strong>Price:</strong> {{ product.price | currency }}</p>
+      <p><strong>Brand:</strong> {{ product.brand.name }}</p>
+      <p><strong>Category:</strong> {{ product.category.category }}</p>
+      <p><strong>Subcategory:</strong> {{ product.subCategory.name }}</p>
+      <button class="add-to-cart-btn" (click)="addToCart(product._id)">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- Related Products -->
+  <h3 class="related-title">Related Products</h3>
+  <div class="related-products">
+    <div class="related-card" *ngFor="let rel of relatedProducts">
+      <div class="rel-image-wrapper">
+        <img [src]="'http://localhost:3000/uploads/' + rel.image" alt="{{ rel.name }}">
+      </div>
+      <div class="rel-info">
+        <p class="rel-name">{{ rel.name }}</p>
+        <p class="rel-price">{{ rel.price | currency }}</p>
+        <button [routerLink]="['/productDetails', rel.route]" class="rel-details-btn">More Details</button>
+      </div>
+    </div>
+  </div>
+
+</div>

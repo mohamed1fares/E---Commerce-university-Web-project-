@@ -1,4 +1,4 @@
-<h2 class="title">Order List (Admin)</h2>
+<!-- <h2 class="title">Order List (Admin)</h2>
 
 <div *ngIf="loading" class="loading">Loading orders...</div>
 <div *ngIf="error" class="alert alert--error">{{ error }}</div>
@@ -27,7 +27,6 @@
         <td>
           <ul class="items">
             <li *ngFor="let o of g.orders" class="flex items-center gap-2">
-              <!-- badge -->
               <span class="badge"
                 [ngClass]="{
                   'badge--pending': o.status === 'pending',
@@ -40,8 +39,8 @@
                 {{ o.status }}
               </span>
 
-              <!-- dropdown -->
               <select class="select"
+                    title="dsad"
                       [(ngModel)]="o.status"
                       (ngModelChange)="changeStatus(o, $event)">
                 <option *ngFor="let s of statuses" [ngValue]="s">{{ s }}</option>
@@ -63,14 +62,12 @@
   No orders found
 </div>
 
-<!-- pagination -->
 <div class="pagination" *ngIf="!loading && groupedOrders.length">
   <button class="btn" (click)="prevPage()" [disabled]="page===1">Previous</button>
   <span class="pagination__info">Page {{page}}</span>
   <button class="btn" (click)="nextPage()" [disabled]="page*limit>=total">Next</button>
 </div>
 
-<!-- details drawer / modal -->
 <div *ngIf="selectedGroup" class="overlay" (click)="closeDetail()">
   <div class="modal" (click)="$event.stopPropagation()">
     <div class="modal__header">
@@ -100,8 +97,8 @@
             {{ o.status }}
           </span>
 
-          <!-- dropdown -->
           <select class="select"
+          title="dsad"
                   [(ngModel)]="o.status"
                   (ngModelChange)="changeStatus(o, $event)">
             <option *ngFor="let s of statuses" [ngValue]="s">{{ s }}</option>
@@ -116,6 +113,138 @@
 
     <div class="modal__footer">
       <button class="btn" (click)="closeDetail()">Close</button>
+    </div>
+  </div>
+</div> -->
+
+
+<h2 class="title">Order Management (Admin)</h2>
+
+<div *ngIf="loading" class="loading-spinner">
+  <div class="spinner"></div> Loading orders...
+</div>
+
+<div *ngIf="error" class="alert alert--error">{{ error }}</div>
+
+<div class="table-responsive" *ngIf="!loading && groupedOrders.length">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Products Details</th>
+        <th>Status Tracking</th>
+        <th>Total Amount</th>
+        <th class="text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let g of groupedOrders">
+        <td>
+          <div class="user-info">
+            <strong>{{ g.user?.name }}</strong><br>
+            <small>{{ g.user?.email }}</small>
+          </div>
+        </td>
+
+        <td>
+          <ul class="items-list">
+            <li *ngFor="let o of g.orders">
+              {{ o.product?.name }} <span class="qty-tag">x{{ o.quantity }}</span>
+            </li>
+          </ul>
+        </td>
+
+        <td>
+          <div *ngFor="let o of g.orders" class="status-control flex items-center gap-2 mb-2">
+            <span class="badge"
+              [ngClass]="{
+                'badge--pending': o.status === 'pending',
+                'badge--processing': o.status === 'processing',
+                'badge--shipped': o.status === 'shipped',
+                'badge--delivered': o.status === 'delivered',
+                'badge--cancelled': o.status === 'cancelled'
+              }">
+              {{ o.status | titlecase }}
+            </span>
+
+            <select title="adasd" class="select-sm"
+                    [(ngModel)]="o.status"
+                    (ngModelChange)="changeStatus(o, $event)">
+              <option *ngFor="let s of statuses" [ngValue]="s">{{ s | titlecase }}</option>
+            </select>
+          </div>
+        </td>
+
+        <td class="mono-price">{{ g.total | currency }}</td>
+
+        <td class="text-right">
+          <div class="btn-group">
+            <button class="btn btn--ghost" (click)="viewUserOrders(g)">
+              <i class="fa fa-eye"></i> View
+            </button>
+            <button class="btn btn--danger" (click)="deleteOrder(g)">
+              <i class="fa fa-trash"></i> Delete User Orders
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="!loading && groupedOrders.length === 0" class="empty-state">
+  <i class="fa fa-box-open"></i>
+  <p>No orders found at the moment.</p>
+</div>
+
+<div class="pagination" *ngIf="!loading && groupedOrders.length">
+  <button class="btn-nav" (click)="prevPage()" [disabled]="page===1">
+    <i class="fa fa-chevron-left"></i> Previous
+  </button>
+  <span class="pagination__info">Page <strong>{{page}}</strong></span>
+  <button class="btn-nav" (click)="nextPage()" [disabled]="page * limit >= total">
+    Next <i class="fa fa-chevron-right"></i>
+  </button>
+</div>
+
+<div *ngIf="selectedGroup" class="overlay" (click)="closeDetail()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <h3 class="modal__title">Invoice Details: {{ selectedGroup.user?.name }}</h3>
+      <button class="close-btn" (click)="closeDetail()">✕</button>
+    </div>
+
+    <div class="modal__body">
+      <table class="sub-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Status & Actions</th> </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let o of selectedGroup.orders">
+            <td>{{ o.product?.name }}</td>
+            <td>{{ o.quantity }}</td>
+            <td>{{ o.total | currency }}</td>
+            <td>
+              <div class="flex items-center gap-2">
+                <select title="CXdas"  class="select-sm" [(ngModel)]="o.status" (ngModelChange)="changeStatus(o, $event)">
+                  <option *ngFor="let s of statuses" [ngValue]="s">{{ s }}</option>
+                </select>
+                
+                <button class="btn-icon-danger" (click)="deleteSingleOrder(o, selectedGroup)" title="Delete this item">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="grand-total">
+        <strong>Grand Total:</strong> {{ selectedGroup.total | currency }}
+      </div>
     </div>
   </div>
 </div>

@@ -135,26 +135,62 @@ export class OrderListComponent implements OnInit, OnDestroy {
   }
   
 
-  // حذف order واحدة
-  deleteOrder(order: Order) {
-    if (!confirm(`حذف الأوردر ${order._id} نهائياً؟`)) return;
-    const sub = this.orderService.deleteOrder(order._id).subscribe({
+
+
+  deleteOrder(group: any) {
+    const userId = group.user?._id;
+  
+    if (!userId) {
+      alert('User ID is missing');
+      return;
+    }
+  
+    if (!confirm(`هل أنت متأكد من حذف جميع طلبات المستخدم ${group.user.name}؟`)) return;
+  
+    const sub = this.orderService.deleteOrdersByUser(userId).subscribe({
       next: _ => {
-        this.orders = this.orders.filter(o => o._id !== order._id);
-        if (this.selectedGroup) {
-          this.selectedGroup.orders = this.selectedGroup.orders.filter((o: Order) => o._id !== order._id);
-          this.selectedGroup.total = this.selectedGroup.orders.reduce((sum: number, o: Order) => sum + (o.total || 0), 0);
-        }
-        this.groupOrdersByUser();
-        alert('Order deleted');
+        // إزالة المجموعة من القائمة محلياً
+        this.groupedOrders = this.groupedOrders.filter(g => g.user?._id !== userId);
+        alert('All orders for this user deleted');
       },
       error: err => {
         console.error(err);
-        alert('Failed to delete order');
+        alert('Failed to delete user orders');
       }
     });
     this.subs.push(sub);
   }
+
+  // 1. وظيفة حذف أوردر واحد (من داخل الـ Popup)
+  deleteSingleOrder(order: any, group: any) {
+    const orderId = order._id;
+    if (!orderId) return;
+  
+    if (!confirm(`هل أنت متأكد من حذف هذا المنتج "${order.product?.name}" فقط؟`)) return;
+  
+    this.orderService.deleteOrder(orderId).subscribe({
+      next: () => {
+        // تحديث قائمة الطلبات داخل الـ Popup فوراً
+        group.orders = group.orders.filter((o: any) => o._id !== orderId);
+        
+        // إعادة حساب المجموع الكلي (Total) داخل الـ Popup
+        group.total = group.orders.reduce((sum: number, o: any) => sum + (o.total || 0), 0);
+        
+        // إذا تم حذف كل الأوردرات الخاصة بهذا المستخدم من الداخل، نغلق الـ Popup ونمسحه من الجدول الرئيسي
+        if (group.orders.length === 0) {
+          this.groupedOrders = this.groupedOrders.filter(g => g.user?._id !== group.user?._id);
+          this.closeDetail();
+        }
+        
+        alert('تم حذف المنتج بنجاح');
+      },
+      error: err => {
+        console.error(err);
+        alert('فشل في حذف المنتج');
+      }
+    });
+  }
+  
 
   // pagination handlers (بسيطة)
   prevPage() {

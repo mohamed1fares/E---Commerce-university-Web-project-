@@ -1,0 +1,382 @@
+/* .add-brand-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  .add-brand-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+  }
+  
+  .add-brand-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #000000;
+  }
+  
+  .form-group input {
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,123,255,0.3);
+  }
+  
+  /* Highlight invalid input */
+  /* .form-group input.invalid {
+    border-color: #dc3545;
+    background-color: #ffe6e6;
+  } */
+  /* Error message styling */
+  /* .error {
+    margin-top: 5px;
+    color: #dc3545;
+    font-size: 14px;
+  }
+  
+  .error span {
+    display: block;
+  }
+  
+  /* Submit button */
+  /* button[type="submit"] {
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button[type="submit"]:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  button[type="submit"]:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+   */
+/* 
+  .email{
+      background-color: white;
+      color: black;
+      font-weight: bolder;
+  }
+
+.test{
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #00ff2a;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;}
+    
+    
+    .test:hover:not(:disabled) {
+      background-color: #33b300;
+    }
+
+
+  input[read-only]{
+    color: black !important;
+  } */
+ 
+
+  
+/* Toast Notification - Modern Style */
+/* .toast-message {
+  position: fixed;
+  top: 80px; 
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 12px;
+  z-index: 3000;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  animation: slideDown 0.5s ease forwards, fadeOut 0.5s ease 2.5s forwards;
+} */
+
+/* Toast Types */
+/* .toast-success {
+  background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+}
+
+.toast-error {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+} */
+
+/* Icon */
+/* .toast-icon i {
+  font-size: 1.2rem;
+} */
+
+/* Animations */
+/* @keyframes slideDown {
+  from { transform: translate(-50%, -30px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; pointer-events: none; }
+} */
+
+/* Responsive */
+/* @media (max-width: 768px) {
+  .toast-message {
+    top: 70px;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .toast-message {
+    top: 65px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+} */
+
+
+/* الحاوية الكبيرة خلفية الصفحة */
+.profile-page-wrapper {
+  background-color: #f1f5f9;
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* الكارت الرئيسي */
+.profile-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 650px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* رأس الكارت */
+.profile-header {
+  background: #1e293b; /* Navy */
+  padding: 3rem 2rem 2rem;
+  text-align: center;
+  color: #ffffff;
+  position: relative;
+}
+
+.back-home-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.back-home-btn:hover {
+  background: #ffd814;
+  color: #1e293b;
+}
+
+.avatar-circle {
+  width: 90px;
+  height: 90px;
+  background: #ffd814; /* Yellow */
+  color: #1e293b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 0 0 5px rgba(255, 216, 20, 0.2);
+}
+
+.profile-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.profile-header p {
+  margin-top: 8px;
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+/* الفورم */
+.profile-form {
+  padding: 2.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group label i {
+  margin-right: 5px;
+  color: #ffd814;
+}
+
+/* المدخلات (Inputs) */
+.styled-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background-color: #f8fafc;
+  color: #1e293b;
+  font-size: 1rem;
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.styled-input:focus {
+  border-color: #ffd814;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(255, 216, 20, 0.1);
+  outline: none;
+}
+
+.styled-input.invalid {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+/* الأخطاء */
+.error-container {
+  color: #ef4444;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+/* أزرار الحفظ */
+.form-actions {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.submit-btn {
+  background: #1e293b;
+  color: #ffffff;
+  padding: 12px 40px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(30, 41, 59, 0.2);
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #ffd814;
+  color: #1e293b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 216, 20, 0.3);
+}
+
+.submit-btn:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Toast Notification Styles (نفس الستايل اللي بعتهولك قبل كدة لضمان التناسق) */
+.toast-message {
+  position: fixed;
+  top: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  z-index: 9999;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  color: white;
+}
+
+.toast-success { background: #22c55e; }
+.toast-error { background: #ef4444; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .full-width { grid-column: span 1; }
+  .profile-card { border-radius: 0; }
+  .profile-page-wrapper { padding: 0; }
+}

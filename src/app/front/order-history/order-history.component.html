@@ -1,0 +1,96 @@
+<!-- <div *ngIf="loading">Loading orders...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div *ngIf="orders && orders.length > 0; else noOrders">
+  <table class="orders-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.product?.name }}</td>
+        <td>{{ order.quantity }}</td>
+        <td>{{ order.product?.price | currency }}</td>
+        <td>{{ order.total | currency }}</td>
+        <td>
+          <span [ngClass]="{
+            'status-pending': order.status==='pending',
+            'status-processing': order.status==='processing',
+            'status-shipped': order.status==='shipped',
+            'status-delivered': order.status==='delivered',
+            'status-cancelled': order.status==='cancelled'
+          }">{{ order.status | titlecase }}</span>
+        </td>
+        <td>{{ order.createdAt | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noOrders>
+  <p>No orders found.</p>
+</ng-template> -->
+
+
+<div class="order-history-container">
+  <div class="header-section">
+    <h2><i class="fa fa-shopping-bag"></i> My Order History</h2>
+    <p>Manage and track your recent purchases</p>
+  </div>
+
+  <div *ngIf="loading" class="state-msg">
+    <div class="spinner"></div> Loading orders...
+  </div>
+  
+  <div *ngIf="error" class="error-msg">{{ error }}</div>
+
+  <div *ngIf="orders && orders.length > 0; else noOrders" class="table-wrapper">
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>Product Details</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Total Amount</th>
+          <th>Current Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td class="product-cell">
+            <span class="product-name">{{ order.product?.name }}</span>
+          </td>
+          <td><span class="qty-badge">{{ order.quantity }}</span></td>
+          <td class="price-text">{{ order.product?.price | currency }}</td>
+          <td class="total-text">{{ order.total | currency }}</td>
+          <td>
+            <span class="status-pill" [ngClass]="{
+              'status-pending': order.status==='pending',
+              'status-processing': order.status==='processing',
+              'status-shipped': order.status==='shipped',
+              'status-delivered': order.status==='delivered',
+              'status-cancelled': order.status==='cancelled'
+            }">{{ order.status | titlecase }}</span>
+          </td>
+          <td class="date-cell">{{ order.createdAt | date:'mediumDate' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noOrders>
+    <div class="empty-state">
+      <i class="fa fa-box-open"></i>
+      <p>You haven't placed any orders yet.</p>
+      <button routerLink="/" class="shop-now-btn">Start Shopping</button>
+    </div>
+  </ng-template>
+</div>

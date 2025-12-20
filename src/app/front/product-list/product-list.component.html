@@ -1,0 +1,51 @@
+
+<!-- 🔍 Search Box -->
+<div class="search-box">
+  <input
+  type="text"
+  placeholder="🔍 Search products..."
+  [(ngModel)]="searchText"
+  (input)="onSearchChange()"
+  />
+</div>
+
+
+<!-- Toast Notification -->
+<div 
+  *ngIf="showMessage" 
+  [ngClass]="{'toast-success': success, 'toast-error': !success}" 
+  class="toast-message">
+  <span class="toast-icon">
+    <i class="fa" [ngClass]="success ? 'fa-check-circle' : 'fa-exclamation-circle'"></i>
+  </span>
+  <span class="toast-text">{{ messageText }}</span>
+</div>
+
+
+<!-- 🛒 Products Grid -->
+<div class="product-grid-area">
+  <div class="product-grid">
+    <div *ngFor="let product of products" class="product-card">
+      <div class="product-image">
+        <img
+          [src]="'http://localhost:3000/uploads/' + product.image"
+          alt="{{ product.name }}"
+        />
+      </div>
+      <div class="product-info">
+        <h4>{{ product.name }}</h4>
+        <p class="product-price">{{ product.price | currency }}</p>
+        <p class="product-desc">{{ product.description }}</p>
+      </div>
+      <button class="buy-btn" (click)="addToCart(product._id)">
+        Add to Cart
+      </button>
+      <button class="buy-btn" style="margin-top: 10px;" 
+      [routerLink]="['/productDetails', product.route]">
+      More Details
+    </button>
+    </div>
+  </div>
+</div>
+
+

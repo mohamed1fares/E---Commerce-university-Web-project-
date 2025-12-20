@@ -1,0 +1,59 @@
+<nav class="front-navbar">
+  <div class="navbar-left">
+    <span routerLink="/" class="logo">Clothes-Shop</span>
+  </div>
+  <div class="navbar-center">
+    <!-- <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search products..."
+      class="search-bar"
+    />
+    <button class="search-btn" (click)="onSearch()">
+      <i class="fa fa-search"></i>
+    </button> -->
+  </div>
+  <div class="navbar-right">
+    <ng-container *ngIf="!authService.isLogin(); else loggedIn">
+      <button class="icon-btn" (click)="goToLogin()">Login</button>
+      <button class="icon-btn" (click)="goToSignup()">Sign Up</button>
+    </ng-container>
+    <ng-template #loggedIn>
+
+
+
+
+
+      @if (isAdmin) {
+        <button class="icon-btn" title="Dashboard" (click)="dashborad()">
+          <i class="fa fa-tachometer-alt"></i>
+          <span class="ml-1">Dashboard</span>
+        </button>
+
+      }
+      
+
+
+      
+      @if (!isAdmin) {
+
+        <button class="icon-btn" title="profile" routerLink="profile" >
+          <!-- <i class="fa fa-list-alt"></i> أي أيقونة مناسبة -->your profile
+        </button>
+
+        <button class="icon-btn" title="Order History" (click)="goToProfile()">
+          <i class="fa fa-list-alt"></i> <!-- أي أيقونة مناسبة -->
+        </button>
+
+
+        <button class="icon-btn cart-btn" title="Cart" (click)="goToCart()" >
+          <i class="fa fa-shopping-cart"></i>
+        </button>
+
+      }
+      
+      <button class="icon-btn" (click)="logout()" style="margin-right: 50px;">Logout</button>
+
+    </ng-template>
+  </div>
+</nav>

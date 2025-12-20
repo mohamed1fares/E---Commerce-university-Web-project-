@@ -1,0 +1,40 @@
+<div class="cart-container">
+  <div *ngIf="loading">Loading cart...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div *ngIf="cart.items && cart.items.length > 0; else emptyCart">
+    <table>
+      <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+        <th>Action</th>
+      </tr>
+      <tr *ngFor="let item of cart.items">
+        <td>
+          <img [src]="'http://localhost:3000/uploads/' + item.image" alt="{{item.name}}">
+          <br>
+          {{ item.name }}
+        </td>
+        <td>
+          <input type="number" [(ngModel)]="item.quantity"
+           (ngModelChange)="updateQuantity(item._id, item.quantity)">
+        </td>
+        <td>{{ item.price | currency }}</td>
+        <td>{{ item.subtotal | currency }}</td>
+        <td>
+          <button class="remove" (click)="removeItem(item._id)">Remove</button>
+        </td>
+      </tr>
+    </table>
+
+    <h3>Total: {{ cart.totalPrice | currency }}</h3>
+    <button class="checkout" (click)="checkout()">Checkout</button>
+    <button class="clear" (click)="clearCart()">Clear Cart</button>
+  </div>
+
+  <ng-template #emptyCart>
+    <p class="empty-cart">Your cart is empty 🛒</p>
+  </ng-template>
+</div>

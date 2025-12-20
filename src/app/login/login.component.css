@@ -1,0 +1,122 @@
+/* Container */
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 120px auto; /* فوق navbar */
+  padding: 2rem 2.5rem;
+  background: linear-gradient(135deg, #1e293b, #111827);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+/* Form Title */
+.login-container h2 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #ffd814;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* Labels */
+.login-container label {
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  display: block;
+  font-weight: 500;
+  color: #f0f0f0;
+}
+
+/* Inputs */
+.login-container input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  outline: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+}
+
+.login-container input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.login-container input:focus {
+  border-color: #ffd814;
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 0 8px rgba(255, 216, 20, 0.4);
+}
+
+/* Error Messages */
+.login-container div span {
+  color: #ff4d4f;
+  font-size: 0.85rem;
+  display: block;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Buttons */
+.login-container button[type="submit"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ffd814 0%, #f7ca00 100%);
+  color: #1a202c;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.login-container button[type="submit"]:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  background: linear-gradient(135deg, #f7ca00 0%, #e6b800 100%);
+}
+
+.login-container button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Signup Button */
+.signup-btn {
+  margin-top: 1rem;
+  padding: 0.65rem 1rem;
+  border: 2px solid #ffd814;
+  border-radius: 12px;
+  font-weight: 600;
+  background: transparent;
+  color: #ffd814;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signup-btn:hover {
+  background: #ffd814;
+  color: #1a202c;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1.5rem 1.5rem;
+    margin: 100px 1rem;
+  }
+}

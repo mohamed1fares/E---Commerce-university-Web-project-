@@ -1,0 +1,213 @@
+/* .orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-family: Arial, sans-serif;
+  }
+  
+  .orders-table th,
+  .orders-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  .orders-table th {
+    background: #232f3e;
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .orders-table tr:nth-child(even) {
+    background: rgba(35,47,62,0.05);
+  }
+  
+  .status-pending { background: #ffc107; color: #000; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 600; }
+  .status-processing { background: #17a2b8; color: #fff; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 600; }
+  .status-shipped { background: #007bff; color: #fff; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 600; }
+  .status-delivered { background: #28a745; color: #fff; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 600; }
+  .status-cancelled { background: #dc3545; color: #fff; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 600; }
+   */
+
+   /* الحاوية الرئيسية */
+.order-history-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* قسم العنوان */
+.header-section {
+  margin-bottom: 2rem;
+}
+
+.header-section h2 {
+  color: #1a202c;
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-section h2 i {
+  color: #ffd814;
+}
+
+.header-section p {
+  color: #718096;
+  font-size: 1rem;
+}
+
+/* تغليف الجدول لإضافة حواف دائرية وظلال */
+.table-wrapper {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* لضمان عدم خروج المحتوى عن الزوايا المنحنية */
+  border: 1px solid #edf2f7;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+/* رأس الجدول */
+.orders-table th {
+  background-color: #f8fafc;
+  color: #4a5568;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 2px solid #edf2f7;
+}
+
+/* خلايا الجدول */
+.orders-table td {
+  padding: 1.25rem 1.5rem;
+  color: #2d3748;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #edf2f7;
+  vertical-align: middle;
+}
+
+.orders-table tr:last-child td {
+  border-bottom: none;
+}
+
+.orders-table tr:hover {
+  background-color: #f7fafc;
+  transition: background 0.2s ease;
+}
+
+/* اسم المنتج */
+.product-name {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+/* تنسيق الكمية والسعر */
+.qty-badge {
+  background: #edf2f7;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.price-text {
+  color: #4a5568;
+}
+
+.total-text {
+  font-weight: 700;
+  color: #1a202c;
+  font-size: 1.05rem;
+}
+
+/* تنسيق حالات الطلب (Status Pills) */
+.status-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+  min-width: 100px;
+}
+
+.status-pending { background: #fffaf0; color: #975a16; border: 1px solid #fbd38d; }
+.status-processing { background: #ebf8ff; color: #2b6cb0; border: 1px solid #90cdf4; }
+.status-shipped { background: #faf5ff; color: #6b46c1; border: 1px solid #d6bcfa; }
+.status-delivered { background: #f0fff4; color: #276749; border: 1px solid #9ae6b4; }
+.status-cancelled { background: #fff5f5; color: #9b2c2c; border: 1px solid #feb2b2; }
+
+/* رسائل الخطأ والتحميل */
+.error-msg { background: #fff5f5; color: #c53030; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+.state-msg { text-align: center; padding: 3rem; color: #718096; }
+
+/* الحالة الفارغة */
+.empty-state {
+  text-align: center;
+  padding: 5rem 2rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.empty-state i {
+  font-size: 4rem;
+  color: #cbd5e0;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state p {
+  font-size: 1.2rem;
+  color: #4a5568;
+  margin-bottom: 2rem;
+}
+
+.shop-now-btn {
+  background: #ffd814;
+  color: #1a202c;
+  border: none;
+  padding: 0.8rem 2.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.shop-now-btn:hover {
+  transform: scale(1.05);
+  background: #f7ca00;
+}
+
+/* تجاوب الشاشات الصغيرة (Mobile Responsive) */
+@media (max-width: 768px) {
+  .orders-table thead { display: none; } /* إخفاء الرأس في الموبايل */
+  .orders-table tr { 
+    display: block; 
+    margin-bottom: 1rem; 
+    border: 1px solid #edf2f7;
+    border-radius: 12px;
+  }
+  .orders-table td { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    border-bottom: 1px solid #f7fafc;
+    padding: 1rem;
+  }
+  .orders-table td::before {
+    content: attr(data-label); /* يمكن إضافة data-label في الـ HTML لاحقاً */
+    font-weight: 700;
+    color: #718096;
+  }
+}

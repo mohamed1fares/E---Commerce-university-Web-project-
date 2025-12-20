@@ -22,7 +22,7 @@
         <tr *ngFor="let sub of subcategories" >
           @if(!sub.isDeleted){
           <td>{{ sub.name }}</td>
-          <td>{{ sub.category?.category }}</td> <!-- Woman's -->
+          <td>{{ sub.category.category }}</td> <!-- Woman's -->
           <!-- <td>{{ sub.category?.name }}</td>     Jackets -->
           <td>
             <button class="btn btn-sm btn-danger" (click)="deleteSubcategory(sub._id)">
