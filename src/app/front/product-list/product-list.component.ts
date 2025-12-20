@@ -11,15 +11,28 @@ import { FilterService } from '../../core/services/filter.service';
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports:[CurrencyPipe, FormsModule,CommonModule,RouterLink],
+  imports:[CurrencyPipe, FormsModule, CommonModule, RouterLink],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css',
 })
 export class ProductListComponent implements OnInit, OnDestroy {
-  products: Product[] = [];
-  private fullProducts: Product[] = [];
+  // المصفوفات
+  fullProducts: Product[] = [];      
+  filteredProducts: Product[] = [];  
+  pagedProducts: Product[] = [];     
+
+  // متغيرات الحالة
+  loading: boolean = true; // 👈 ضفنا المتغير ده هنا عشان يحل المشكلة
+  currentPage: number = 1;
+  itemsPerPage: number = 8;
+  
   searchText: string = '';
   private sub?: Subscription;
+
+  // متغيرات التنبيه (Toast)
+  showMessage: boolean = false;
+  messageText: string = '';
+  success: boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -28,72 +41,95 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true; // نبدأ عملية التحميل
     this.sub = combineLatest([
       this.productService.getProducts(),
       this.filterService.filter$
     ]).subscribe({
       next: ([data, filter]) => {
-        // Explicit typing
         const arr: Product[] = Array.isArray(data)
           ? (data as Product[])
           : ((data as any)?.data as Product[]) ?? [];
     
         this.fullProducts = arr.filter((p: Product) => !p.isDeleted);
-    
-        // فلترة بالكاتيجوري والساب كاتيجوري
-        this.products = this.fullProducts.filter((p: Product) => {
-          const matchCat = filter.category ? p.category?._id === filter.category : true;
-          const matchSub = filter.subcategory ? p.subCategory?._id === filter.subcategory : true;
-          return matchCat && matchSub;
-        });
-    
-        // فلترة بالـ search
-        if (this.searchText.trim()) {
-          const search = this.searchText.toLowerCase();
-          this.products = this.products.filter((p: Product) =>
-            p.name?.toLowerCase().includes(search) || 
-            p.description?.toLowerCase().includes(search)
-          );
-        }
+        this.applyFilters(filter);
+        this.loading = false; // 👈 نقفل التحميل بعد ما الداتا توصل
+      },
+      error: (err) => {
+        console.error(err);
+        this.loading = false; // نقفل التحميل حتى لو حصل خطأ
       }
     });
-    
   }
 
-  ngOnDestroy(): void {
-    this.sub?.unsubscribe();
+  applyFilters(filter: any) {
+    let results = this.fullProducts.filter((p: Product) => {
+      const matchCat = filter.category ? p.category?._id === filter.category : true;
+      const matchSub = filter.subcategory ? p.subCategory?._id === filter.subcategory : true;
+      return matchCat && matchSub;
+    });
+
+    if (this.searchText.trim()) {
+      const search = this.searchText.toLowerCase();
+      results = results.filter((p: Product) =>
+        p.name?.toLowerCase().includes(search) || 
+        p.description?.toLowerCase().includes(search)
+      );
+    }
+
+    this.filteredProducts = results;
+    this.currentPage = 1; 
+    this.updateDisplay();
+  }
+
+  updateDisplay() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.pagedProducts = this.filteredProducts.slice(startIndex, endIndex);
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updateDisplay();
+      window.scrollTo(0, 0);
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updateDisplay();
+      window.scrollTo(0, 0);
+    }
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredProducts.length / this.itemsPerPage);
   }
 
   onSearchChange() {
-    // هنا مش محتاج تعمل حاجة إضافية، 
-    // لأن الفلترة كلها بتتعامل في الـ subscribe فوق
-    // مجرد تعمل trigger للـ subscribe
-    const search = this.searchText.toLowerCase();
-    this.products = this.fullProducts.filter(p =>
-      !p.isDeleted &&
-      (p.name?.toLowerCase().includes(search) || p.description?.toLowerCase().includes(search))
-    );
+    this.filterService.filter$.subscribe(f => this.applyFilters(f)).unsubscribe();
   }
 
-  showMessage: boolean = false;
-  messageText: string = '';
-  success: boolean = false;
   addToCart(id: string) {
     this._cart.addToCart(id).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.messageText = 'Product added to cart!';
         this.success = true;
         this.showMessage = true;
         setTimeout(() => this.showMessage = false, 2500);
       },
       error: (err) => {
-        console.error(err);
         this.messageText = 'Failed to add product.';
         this.success = false;
         this.showMessage = true;
         setTimeout(() => this.showMessage = false, 2500);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
   }
 }
